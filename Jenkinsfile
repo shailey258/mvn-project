@@ -116,7 +116,7 @@ pipeline {
 
         stage('Inspect files'){
             steps {
-                sh 'ls -l target'
+                bat 'dir target'
             }
         }
 
