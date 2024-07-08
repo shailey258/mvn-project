@@ -124,11 +124,11 @@ pipeline {
             steps {
 
                 script {
-                    nexusPublisher nexusInstanceId: 'srm',
+                    nexusPublisher nexusInstanceId: 'nexusrepo1',
                         nexusRepositoryId: "${DEV_REPO}",
                         packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: 'jar', filePath: "${ARTEFACT_NAME}"]],
-                        mavenCoordinate: [artifactId: 'promotion', groupId: 'org.demo', packaging: 'jar', version: "${BUILD_VERSION}"]]],
-                        tagName: "${STAGING_TAG}"
+                        mavenCoordinate: [artifactId: "${artifactId}", groupId: "${groupId}", packaging: 'jar', version: "${version}"]]],
+                        tagName: "${BUILD_TAG}"
                 }
 
             }
