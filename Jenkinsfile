@@ -21,7 +21,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn -B -Dproject.version=${BUILD_VERSION} -Dmaven.test.failure.ignore clean package'
+                bat 'mvn -U -B -Dproject.version=${BUILD_VERSION} -Dmaven.test.failure.ignore clean package'
             }
             post {
                 success {
