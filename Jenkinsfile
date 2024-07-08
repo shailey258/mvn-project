@@ -56,7 +56,7 @@ pipeline {
            //             def policyEvaluation = nexusPolicyEvaluation advancedProperties: '', 
              //                           enableDebugLogging: false, 
                //                         failBuildOnNetworkError: false, 
-                 //                      iqApplication: selectedApplication("${iqAppID}"),
+                 //                      iqApplication: manualApplication("$appl_name"),
                    //                     iqScanPatterns: [[scanPattern: '**/*.jar']], 
                     //                 iqInstanceId: '${IQ_ID}', 
                       //                    iqStage: 'build', 
@@ -88,7 +88,7 @@ pipeline {
 
                     // construct the meta data (Pipeline Utility Steps plugin)
                     def tagdata = readJSON text: '{}'
-                    tagdata.buildUser = "${USER}" as String
+                   // tagdata.buildUser = "${USER}" as String
                     tagdata.buildNumber = "${BUILD_NUMBER}" as String
                     tagdata.buildId = "${BUILD_ID}" as String
                     tagdata.buildJob = "${JOB_NAME}" as String
