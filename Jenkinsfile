@@ -102,7 +102,7 @@ pipeline {
 
                    // bat 'type ${TAG_FILE}'
 
-                    createTag nexusInstanceId: "${REPO_ID}", tagAttributesPath: "${TAG_FILE}", tagName: "${STAGING_TAG}"
+                    createTag nexusInstanceId: "${REPO_ID}", tagAttributesPath: "${TAG_FILE}", tagName: "${BUILD_TAG}"
 
                     // write the tag name to the build page (Rich Text Publisher plugin)
                     rtp abortedAsStable: false,
