@@ -100,7 +100,7 @@ pipeline {
 
                     writeJSON(file: "${TAG_FILE}", json: tagdata, pretty: 4)
 
-                    bat 'type ${TAG_FILE}'
+                   // bat 'type ${TAG_FILE}'
 
                     createTag nexusInstanceId: "${REPO_ID}", tagAttributesPath: "${TAG_FILE}", tagName: "${STAGING_TAG}"
 
