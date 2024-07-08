@@ -3,7 +3,7 @@ pipeline {
     agent any
 
     environment {
-        APPL_NAME = 'promotion'
+        //APPL_NAME = 'promotion'
 
         ARTEFACT_NAME = "${WORKSPACE}/target/${APPL_NAME}-${BUILD_VERSION}.jar"
 
@@ -39,7 +39,7 @@ pipeline {
                         def policyEvaluation = nexusPolicyEvaluation advancedProperties: '', 
                                         enableDebugLogging: false, 
                                         failBuildOnNetworkError: false, 
-                                        iqApplication: manualApplication("${APPL_NAME}"),
+                                       iqApplication: selectedApplication("${iqAppID}",
                                         iqScanPatterns: [[scanPattern: '**/*.jar']], 
                                         iqInstanceId: '${IQ_ID}', 
                                         iqStage: 'build', 
