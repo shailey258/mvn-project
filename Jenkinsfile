@@ -44,6 +44,8 @@ pipeline {
                                         iqInstanceId: '${IQ_ID}', 
                                         iqStage: 'build', 
                                         jobCredentialsId: 'Sonatype'
+                        echo $APPL_NAME
+                        echo $IQ_ID
 
                         echo "Nexus IQ scan succeeded: ${policyEvaluation.applicationCompositionReportUrl}"
                         SCAN_URL = "${policyEvaluation.applicationCompositionReportUrl}"
