@@ -3,14 +3,14 @@ pipeline {
     agent any
 
     environment {
-        //APPL_NAME = 'promotion'//
+        //APPL_NAME = 'promotion'
 
-        ARTEFACT_NAME = "${WORKSPACE}/target/${APPL_NAME}-${BUILD_VERSION}.jar"
+        ARTEFACT_NAME = "${WORKSPACE}/target/${iqAppID}-${groupId}.${artifactId}.${version}.jar"
 
         SCAN_URL = ""
 
         DEV_REPO = 'staging-development'
-        STAGING_TAG = "${APPL_NAME}-${BUILD_VERSION}"
+        STAGING_TAG = "${iqAppID}-${groupId}.${artifactId}.${version}"
         TAG_FILE = "${WORKSPACE}/tag.json"
 
         IQ_ID = 'Nexusiqid'
@@ -21,7 +21,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn -U -B -Dproject.version=${BUILD_VERSION} -Dmaven.test.failure.ignore clean package'
+                bat 'mvn -U -B -Dproject.version=${version} -Dmaven.test.failure.ignore clean package'
             }
             post {
                 success {
@@ -93,14 +93,14 @@ pipeline {
                     tagdata.buildId = "${BUILD_ID}" as String
                     tagdata.buildJob = "${JOB_NAME}" as String
                     tagdata.buildTag = "${BUILD_TAG}" as String
-                    tagdata.appVersion = "${BUILD_VERSION}" as String
+                    tagdata.appVersion = "${version}" as String
                     tagdata.buildUrl = "${BUILD_URL}" as String
                     tagdata.iqScanUrl = "${SCAN_URL}" as String
                     tagdata.promote = false
 
                     writeJSON(file: "${TAG_FILE}", json: tagdata, pretty: 4)
 
-                    sh 'cat ${TAG_FILE}'
+                    bat 'type ${TAG_FILE}'
 
                     createTag nexusInstanceId: "${REPO_ID}", tagAttributesPath: "${TAG_FILE}", tagName: "${STAGING_TAG}"
 
