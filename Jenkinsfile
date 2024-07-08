@@ -5,7 +5,7 @@ pipeline {
     environment {
         //APPL_NAME = 'promotion'
 
-        ARTEFACT_NAME = "${WORKSPACE}/target/${iqAppID}-${groupId}.${artifactId}.${version}.jar"
+        ARTEFACT_NAME = "${WORKSPACE}/target/${artifactId}-${version}.jar"
 
         SCAN_URL = ""
 
@@ -21,7 +21,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn -U -B -Dproject.version=${version} -Dmaven.test.failure.ignore clean package'
+                bat 'mvn -U -B -Dproject.version=$BUILD_VERSION -Dmaven.test.failure.ignore clean package'
             }
             post {
                 success {
