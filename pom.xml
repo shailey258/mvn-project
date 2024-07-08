@@ -83,6 +83,7 @@
             <plugin>
                 <groupId>org.cyclonedx</groupId>
                 <artifactId>cyclonedx-maven-plugin</artifactId>
+		<version>2.0.3</version>
                 <configuration>
                     <outputFormat>all</outputFormat>
                     <outputName>${artifactId}-bom</outputName>
