@@ -6,7 +6,7 @@
 
     <groupId>org.demo</groupId>
     <artifactId>promotion</artifactId>
-    <version>${project.version}</version>
+    <version>1.0.0</version>
 
     <!-- to download from nexus -->
   	 <repositories>
