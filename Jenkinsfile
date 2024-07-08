@@ -33,22 +33,11 @@ pipeline {
 
         stage('Nexus IQ Scan'){
             steps {
-                script{
-                
+                script{         
                     try {
-                        def policyEvaluation = nexusPolicyEvaluation advancedProperties: '', 
-                                        enableDebugLogging: false, 
-                                        failBuildOnNetworkError: false, 
-                                       iqApplication: selectedApplication("${iqAppID}"),
-                                        iqScanPatterns: [[scanPattern: '**/*.jar']], 
-                                        iqInstanceId: '${IQ_ID}', 
-                                        iqStage: 'build', 
-                                        jobCredentialsId: 'Sonatype'
-                        echo $APPL_NAME
-                        echo $IQ_ID
-
+                        def policyEvaluation = nexusPolicyEvaluation failBuildOnNetworkError: true, iqApplication: selectedApplication("${iqAppID}"), iqScanPatterns: [[scanPattern: "**/*.${packaging}"]], iqStage: "${iqStage}", jobCredentialsId: ''
                         echo "Nexus IQ scan succeeded: ${policyEvaluation.applicationCompositionReportUrl}"
-                        SCAN_URL = "${policyEvaluation.applicationCompositionReportUrl}"
+                        IQ_SCAN_URL = "${policyEvaluation.applicationCompositionReportUrl}"
                     } 
                     catch (error) {
                         def policyEvaluation = error.policyEvaluation
@@ -58,6 +47,34 @@ pipeline {
                 }
             }
         }
+
+     //   stage('Nexus IQ Scan'){
+       //     steps {
+         //       script{
+              
+             //       try {
+           //             def policyEvaluation = nexusPolicyEvaluation advancedProperties: '', 
+             //                           enableDebugLogging: false, 
+               //                         failBuildOnNetworkError: false, 
+                 //                      iqApplication: selectedApplication("${iqAppID}"),
+                   //                     iqScanPatterns: [[scanPattern: '**/*.jar']], 
+                    //                 iqInstanceId: '${IQ_ID}', 
+                      //                    iqStage: 'build', 
+                        //                 jobCredentialsId: 'Sonatype'
+                        //echo $APPL_NAME
+                        //echo $IQ_ID
+
+                        //echo "Nexus IQ scan succeeded: ${policyEvaluation.applicationCompositionReportUrl}"
+                        //SCAN_URL = "${policyEvaluation.applicationCompositionReportUrl}"
+                    //} 
+                    //catch (error) {
+                      //  def policyEvaluation = error.policyEvaluation
+                        //echo "Nexus IQ scan vulnerabilities detected', ${policyEvaluation.applicationCompositionReportUrl}"
+                        //throw error
+                    //}
+                //}
+            //}
+        //}
 
         stage('Create tag'){
             steps {
