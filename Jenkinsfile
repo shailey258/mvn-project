@@ -13,15 +13,15 @@ pipeline {
         STAGING_TAG = "${APPL_NAME}-${BUILD_VERSION}"
         TAG_FILE = "${WORKSPACE}/tag.json"
 
-        IQ_ID = 'siq'
-        REPO_ID = 'srm'
+        IQ_ID = 'Nexusiqid'
+        REPO_ID = 'nexusrepo1'
     }
 
     stages {
 
         stage('Build') {
             steps {
-                sh 'mvn -B -Dproject.version=${BUILD_VERSION} -Dmaven.test.failure.ignore clean package'
+                bat 'mvn -B -Dproject.version=${BUILD_VERSION} -Dmaven.test.failure.ignore clean package'
             }
             post {
                 success {
