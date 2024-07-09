@@ -48,7 +48,7 @@ pipeline {
             steps {
                 script {
 					echo 'Now moving components to UAT repository...'
-                    moveComponents destination: "${UAT_REPO}", nexusInstanceId: 'nexusrepo1', tagName: "${TAG}"
+                    moveComponents destination: "${UAT_REPO}", nexusInstanceId: 'nexusrepo1', tagName: "${BUILD_TAG}"
                 }
             }
         }
