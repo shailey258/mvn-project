@@ -4,7 +4,7 @@ pipeline {
 
     environment {
         APPLICATION_NAME = 'promotion'
-        APPLICATION_ID  = ''
+        //APPLICATION_ID  = ''
         UAT_REPO = 'staging-uat'
         PROMOTE_DATA_FILE = './promote-data.json'
         REPO_ID = 'srm'
@@ -15,10 +15,10 @@ pipeline {
             steps {
                 script {
 
-                    APPLICATION_ID = bat(returnStdout: true,
+                    //APPLICATION_ID = bat(returnStdout: true,
                                         script: "curl --silent -u admin:admin123 -X GET http://localhost:8070/api/v2/applications | jq -j '.[].[] | select(.name==\"promotion\").id'")
 
-                    echo "application id: ${APPLICATION_ID}"
+                    echo "application id: ${iqAppID}"
                 }
             }
         }
