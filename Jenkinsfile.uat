@@ -37,7 +37,7 @@ pipeline {
 	              //bat 'type ${PROMOTE_DATA_FILE}'
 
 	                bat (returnStdout: true,
-	                   script: "curl.exe -v -u admin:admin123 -X POST -H 'Content-Type:application/json' -d@${PROMOTE_DATA_FILE} http://localhost:8070/api/v2/evaluation/applications/a169a8b473814508ba847a47db42fed7/promoteScan")
+	                   script: "curl.exe -v -u admin:admin123 -X POST -H 'Content-Type: application/json' -d@${PROMOTE_DATA_FILE} http://localhost:8070/api/v2/evaluation/applications/a169a8b473814508ba847a47db42fed7/promoteScan")
 
 	               // bat "/bin/rm ${PROMOTE_DATA_FILE}"
                }
